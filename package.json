@@ -1,0 +1,20 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "project-1": "pnpm run -F @monorepo/project-1",
+    "vue-demo": "pnpm run -F @monorepo/vue-demo",
+    "react-demo": "pnpm run -F @monorepo/react-demo"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.6"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vue": "^3.5.13"
+  }
+}
