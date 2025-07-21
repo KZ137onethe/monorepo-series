@@ -1,9 +1,11 @@
 {
-  "name": "@monorepo/utils",
+  "name": "@monorepo-series/utils",
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
   "dependencies": {
-    "@monorepo/utils": "file:"
   }
 }

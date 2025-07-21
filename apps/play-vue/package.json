@@ -1,10 +1,13 @@
 {
-  "name": "@monorepo/react-demo",
+  "name": "@monorepo-series/play-vue",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "vite"
+  },
+  "dependencies": {
+    "@monorepo-series/utils": "workspace:*"
   },
   "keywords": [],
   "author": "",

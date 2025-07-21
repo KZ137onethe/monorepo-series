@@ -4,9 +4,10 @@ packages:
   - "packages/*"
   - "!**/test"
   - "demo/**"
-  - b
+  - server
 
 catalog:
+  # webpack相关
   webpack: ^5.100.2
   webpack-cli: ^6.0.1
   postcss: ^8.5.6
@@ -15,6 +16,10 @@ catalog:
   gasp: ^3.13.0
   sass: ^1.86.1
   sass-loader: ^16.0.5
+  # 其他
+  vite: ^6.0.6
+  vue: ^3.5.13
+  "@vitejs/plugin-vue": ^5.2.1
 
 catalogs:
   webpack4:
