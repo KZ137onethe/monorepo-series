@@ -26,6 +26,19 @@ function subtractValues() {
     alert("请输入有效的数字")
   }
 }
+
+async function getFruitFn() {
+  return fetch("/api/fruit", { method: "GET", headers: { "Content-Type": "application/json" } })
+    .then((response) => response.json())
+    .then((resp) => {
+      const { data } = resp
+      alert(`获取到的水果数据: ${JSON.stringify(data)}`)
+    })
+    .catch((error) => {
+      console.error("获取水果数据失败:", error)
+      alert("获取水果数据失败")
+    })
+}
 </script>
 
 <template>
@@ -37,6 +50,9 @@ function subtractValues() {
       <div>
         <button @click="addValues">相加</button>
         <button @click="subtractValues">相减</button>
+      </div>
+      <div>
+        <button id="getFruitBtn" @click="getFruitFn">获取/fruit接口的请求</button>
       </div>
     </div>
   </div>

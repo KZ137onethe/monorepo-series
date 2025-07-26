@@ -20,119 +20,173 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
 
 > 请安装pnpm!
 
-* 根目录仓库初始化
+1. 根目录仓库初始化
 
-  ```shell
-  pnpm init # 或者 npm init -y
-  ```
+   ```shell
+   pnpm init # 或者 npm init -y
+   ```
 
-* 创建并配置工作区
+2. 创建并配置工作区
 
-  在根目录下创建一个`pnpm-workspace.yaml`文件作为工作区的配置文件，该文件按照yaml文件的语法编写，但其实在这里用到的语法只有：
+   在根目录下创建一个`pnpm-workspace.yaml`文件作为工作区的配置文件，该文件按照yaml文件的语法编写，但其实在这里用到的语法只有：
 
-  1. **Sequences**，也就是**序列**，用 "-" 来表示缩进，也可以不写
-  2. **通配符模式**，也就是**Glob 模式**，用于**匹配文件路径名**
+   1. **Sequences**，也就是**序列**，用 "-" 来表示缩进，也可以不写
 
-  * `packages`选项来配置每个**模块应用**的工作空间，也就npm仓库
+   2. **通配符模式**，也就是**Glob 模式**，用于**匹配文件路径名**
 
-    ```yaml
-    packages:
-      - a # 根目录下的文件夹 a 为一个工作空间
-      - "apps/*" # 根目录下的文件夹 apps 的下一级的所有目录都为一个工作空间
-      - packages/* # 根目录下的文件夹下 packages 的下一级所有目录都为一个工作空间
-      - "!**/test" # 排除根目录下所有的子目录（包含嵌套）test 作为工作空间
-      - "demo/**" # 根目录下的 demo 文件夹下所有的子目录作为工作空间
-      - b # 根目录下的文件夹 b 为一个工作空间
-    ```
+   **选项**：
 
-  * `catalog`选项来配置单个npm依赖的默认版本，如果多个工作空间使用到了这个npm依赖，那么可以配置实现复用，确保版本一致。
+   1. `packages`选项来配置每个**模块应用**的工作空间，也就npm仓库
 
-    > 其中npm包依赖版本的控制语法同package.json中dependencies、devDependencies一致
+      ```yaml
+      packages:
+        - a # 根目录下的文件夹 a 为一个工作空间
+        - "apps/*" # 根目录下的文件夹 apps 的下一级的所有目录都为一个工作空间
+        - packages/* # 根目录下的文件夹下 packages 的下一级所有目录都为一个工作空间
+        - "!**/test" # 排除根目录下所有的子目录（包含嵌套）test 作为工作空间
+        - "demo/**" # 根目录下的 demo 文件夹下所有的子目录作为工作空间
+        - server # 根目录下的文件夹 server 为一个工作空间
+      ```
 
-    * 配置部分
+      
 
-      pnpm-workspace.yaml
+   2. `catalog`选项来配置单个npm依赖的默认版本，如果多个工作空间使用到了这个npm依赖，那么可以配置实现复用，确保版本一致。
+
+      > 其中npm包依赖版本的控制语法同package.json中dependencies、devDependencies一致
+
+      * 配置部分
+
+        pnpm-workspace.yaml
+
+        ```yaml
+        # ....... 
+        
+        # 下面是配置单个npm依赖的默认版本
+        catalog:
+          webpack: ^5.100.2
+          webpack-cli: ^6.0.1
+          postcss: ^8.5.6
+          postcss-loader: ^8.1.1
+          postcss-preset-env: ^10.1.5
+          gasp: ^3.13.0
+          sass: ^1.86.1
+          sass-loader: ^16.0.5
+          
+        ```
+
+
+      * 复用部分
+
+        工作空间**A**的package.json
+
+        ```json
+        {
+            /* 省略部分 */
+            "dependencies": {
+                "postcss": "catalog:",
+                "postcss-loader": "catalog:",
+                "postcss-preset-env": "catalog:",
+            }
+        }
+        ```
+
+        工作空间**B**的package.json
+
+        ```json
+        {
+            /* 省略部分 */
+            "dependencies": {
+                "postcss": "catalog:",
+                "postcss-loader": "catalog:",
+                "postcss-preset-env": "catalog:",
+                "sass": "catalog:",
+                "sass-loader": "catalog:"
+            }
+        }
+        ```
+
+      如上，`postcss`、`postcss-loader`、`postcss-preset-env`等依赖是按照配置部分的版本安装在各自的工作空间。
+
+      还有一种情况，很多工作空间都需要安装一些固定的依赖，比如说上面的`webpack`、`webpack-cli`，难道每个子工作空间都要写一遍 `"webpack": "catalog:"`和`"webpack-cli": "catalog:"`，当然是可以，但是麻烦，难道`monorepo`这个架构推出来不是给我们偷懒的么？
+
+      实际上，我们可以在根目录下安装`webpack`、`webpack-cli`，所有的子仓库都能共享根目录的依赖：
+
+      * 根目录
+
+        ```json
+        {
+            /* 省略部分 */
+            "dependencies": {
+                "webpack": "catalog:",
+                "webpack-cli": "catalog:"
+            }
+        }
+        ```
+
+
+      * 子工作空间
+
+        ```json
+        {
+            /* 省略部分 */
+            "scripts": {
+                "bundle": "npx webpack",
+            },
+            "dependencies": {
+                "sass": "catalog:",
+                "sass-loader": "catalog:"
+            }
+        }
+        ```
+        
+        可以看一下pnpm官方给的一个示例：[pnpm-workspace.yaml](https://pnpm.io/pnpm-workspace_yaml)
+
+   3. `catalogs`
+
+      如果想对npm包分类或者是想使用同一个包的不同版本，那么使用`catalogs`是一个很好的选择，基础作用和`catalog`一样，记录npm的版本，然后在工作空间使用，但是呢它可以把一些npm作为一个集合，如：
 
       ```yaml
       # ....... 
       
-      # 下面是配置单个npm依赖的默认版本
-      catalog:
-        webpack: ^5.100.2
-        webpack-cli: ^6.0.1
-        postcss: ^8.5.6
-        postcss-loader: ^8.1.1
-        postcss-preset-env: ^10.1.5
-        gasp: ^3.13.0
-        sass: ^1.86.1
-        sass-loader: ^16.0.5
-        
+      # 下面是对npm包进行分类
+      catalogs:
+        vue3:
+          vue: ^3.5.13
+          vite: ^6.0.6
+        	"@vitejs/plugin-vue": ^5.2.1 	
+        vue2:
+        	vue: 2.7.16
+        	webpack: ^5.54.0
+        	"@vue/cli": 3.4.1
       ```
 
-    * 复用部分
-
-      工作空间**A**的package.json
+      工作空间A:
 
       ```json
       {
           /* 省略部分 */
           "dependencies": {
-              "postcss": "catalog:",
-              "postcss-loader": "catalog:",
-              "postcss-preset-env": "catalog:",
+              "vue": "catalog:vue3",
+              "vite": "catalog:vue3",
+              "@vitejs/plugin-vue": "catalog:vue3",
           }
       }
       ```
 
-      工作空间**B**的package.json
+      工作空间B:
 
       ```json
       {
           /* 省略部分 */
           "dependencies": {
-              "postcss": "catalog:",
-              "postcss-loader": "catalog:",
-              "postcss-preset-env": "catalog:",
-              "sass": "catalog:",
-              "sass-loader": "catalog:"
+              "vue": "catalog:vue2",
+              "webpack": "catalog:vue2",
+              "@vue/cli": "catalog:vue2",
           }
       }
       ```
 
-    如上，`postcss`、`postcss-loader`、`postcss-preset-env`等依赖是按照配置部分的版本安装在各自的工作空间。
-
-    还有一种情况，很多工作空间都需要安装一些固定的依赖，比如说上面的`webpack`、`webpack-cli`，难道每个子工作空间都要写一遍 `"webpack": "catalog:"`和`"webpack-cli": "catalog:"`，当然是可以，但是麻烦，难道`monorepo`这个架构推出来不是给我们偷懒的么？
-
-    实际上，我们可以在根目录下安装`webpack`、`webpack-cli`，所有的子仓库都能共享根目录的依赖：
-
-    * 根目录
-
-      ```json
-      {
-          /* 省略部分 */
-          "dependencies": {
-              "webpack": "catalog:",
-              "webpack-cli": "catalog:"
-          }
-      }
-      ```
-
-    * 子工作空间
-
-      ```json
-      {
-          /* 省略部分 */
-          "scripts": {
-              "bundle": "npx webpack",
-          },
-          "dependencies": {
-              "sass": "catalog:",
-              "sass-loader": "catalog:"
-          }
-      }
-      ```
-
-    可以看一下pnpm官方给的一个示例：[pnpm-workspace.yaml](https://pnpm.io/pnpm-workspace_yaml)
+      如上不同的工作空间使用了不同`vue`的版本，而且被分类到不同的集合中，而这些不同的集合都是围绕着分类划分的npm包，这样的语法方便去管理不同集合的npm包。
 
 * 安装依赖
 

@@ -1,0 +1,16 @@
+{
+  "name": "play-webpack-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx webpack-dev-server"
+  },
+  "dependencies": {
+    "@monorepo-series/utils": "workspace:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1"
+}

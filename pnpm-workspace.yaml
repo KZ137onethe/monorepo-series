@@ -10,6 +10,8 @@ catalog:
   # webpack相关
   webpack: ^5.100.2
   webpack-cli: ^6.0.1
+  html-webpack-plugin: ^5.6.3
+  webpack-dev-server: ^5.2.0
   postcss: ^8.5.6
   postcss-loader: ^8.1.1
   postcss-preset-env: ^10.1.5
@@ -20,8 +22,13 @@ catalog:
   vite: ^6.0.6
   vue: ^3.5.13
   "@vitejs/plugin-vue": ^5.2.1
+  # 服务端
+  express: ^5.1.0
+  concurrently: ^9.2.0
+  nodemon: ^3.1.10
 
 catalogs:
   webpack4:
     webpack: 4.47.0
     webpack-cli: 4.10.0
+  

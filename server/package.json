@@ -1,0 +1,17 @@
+{
+  "name": "@monorepo-series/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nodemon index.js"
+  },
+  "keywords": [],
+  "dependencies": {
+    "nodemon": "catalog:",
+    "express": "catalog:"
+  },
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.1"
+}

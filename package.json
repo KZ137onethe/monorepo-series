@@ -5,16 +5,29 @@
   "engines": {
     "node": ">=18",
     "pnpm": ">=9.15.2",
-    "rimraf": ">=6.0.0"
+    "rimraf": ">=6.0.0",
+    "concurrently": ">=9.0.0",
+    "nodemon": ">=3.0.0"
   },
   "scripts": {
+    "clean": "rimraf **/node_modules --glob",
+    "reinstall": "pnpm run clean && pnpm install",
     "play-vue:dev": "pnpm run -F @monorepo/play-vue dev",
+    "play-webpack-1:dev": "pnpm run -F @monorepo/play-webpack-1 dev",
+    "play-webpack-2:dev": "pnpm run -F @monorepo/play-webpack-2 dev",
+    "server:serve": "pnpm run -F @monorepo/server serve",
+    "run-all:dev": "concurrently \"pnpm run -F @monorepo/play-vue dev\" \"pnpm run -F @monorepo/server serve\""
   },
   "dependencies": {
-    "vue": "catalog:"
+    "html-webpack-plugin": "catalog:",
+    "vue": "catalog:",
+    "webpack": "catalog:",
+    "webpack-cli": "catalog:",
+    "webpack-dev-server": "catalog:"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "catalog:",
+    "concurrently": "catalog:",
     "vite": "catalog:"
   }
 }
