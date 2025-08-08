@@ -76,9 +76,9 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
 
 
       * 复用部分
-
+    
         工作空间**A**的package.json
-
+    
         ```json
         {
             /* 省略部分 */
@@ -89,9 +89,9 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
             }
         }
         ```
-
+    
         工作空间**B**的package.json
-
+    
         ```json
         {
             /* 省略部分 */
@@ -104,15 +104,15 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
             }
         }
         ```
-
+    
       如上，`postcss`、`postcss-loader`、`postcss-preset-env`等依赖是按照配置部分的版本安装在各自的工作空间。
-
+    
       还有一种情况，很多工作空间都需要安装一些固定的依赖，比如说上面的`webpack`、`webpack-cli`，难道每个子工作空间都要写一遍 `"webpack": "catalog:"`和`"webpack-cli": "catalog:"`，当然是可以，但是麻烦，难道`monorepo`这个架构推出来不是给我们偷懒的么？
-
+    
       实际上，我们可以在根目录下安装`webpack`、`webpack-cli`，所有的子仓库都能共享根目录的依赖：
-
+    
       * 根目录
-
+    
         ```json
         {
             /* 省略部分 */
@@ -125,7 +125,7 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
 
 
       * 子工作空间
-
+    
         ```json
         {
             /* 省略部分 */
@@ -260,4 +260,52 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
   其中`--filter`可以简写为`-F`
 
   这个CLI命令可以写在根目录的package.json的scripts中，如：`"a:bundle": "pnpm run --filter @monorepo-series/a bundle"`
+
+### 扩展
+
+#### 并行运行项目
+
+为了方便运行多个项目的脚本（比如我想同时运行前端和node.js写的后端），可以安装`concurrently`，参考：[concurrently](https://github.com/open-cli-tools/concurrently?tab=readme-ov-file#usage)
+
+**常用语法1**：
+
+```shell
+# 使用引号将单独的命令括起来，来并行运行两个命令
+concurrently 'command1 arg' 'command2 arg'
+```
+
+可以用package.json来保存这个命令：
+
+```json
+{
+	"scripts": {
+		"start": "concurrently 'node ./index.js' 'node ./scripts.js'"
+	}
+}
+```
+
+其中`concurrently`可以简写为`conc`
+
+```shell
+# 使用引号将单独的命令括起来，来并行运行两个命令
+conc 'command1 arg' 'command2 arg'
+```
+
+**常用语法2**：
+
+可以通过`npm:`的语法来并行执行`package.json`中的命名
+
+```json
+{
+	"scripts": {
+		"index": "node ./index.js",
+		"scripts": "node ./scripts.js",
+		"start": "conc 'npm:index' 'npm:scripts'"
+	}
+}
+```
+
+然后运行`npm run start`，这里对`pnpm`一样适用。
+
+当然`concurrently`还有很多api，可以在node.js中使用，但不属于本文章的范畴。
 

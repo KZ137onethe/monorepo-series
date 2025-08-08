@@ -12,11 +12,11 @@
   "scripts": {
     "clean": "rimraf **/node_modules --glob",
     "reinstall": "pnpm run clean && pnpm install",
-    "play-vue:dev": "pnpm run -F @monorepo/play-vue dev",
-    "play-webpack-1:dev": "pnpm run -F @monorepo/play-webpack-1 dev",
-    "play-webpack-2:dev": "pnpm run -F @monorepo/play-webpack-2 dev",
-    "server:serve": "pnpm run -F @monorepo/server serve",
-    "run-all:dev": "concurrently \"pnpm run -F @monorepo/play-vue dev\" \"pnpm run -F @monorepo/server serve\""
+    "play-webpack-1:dev": "pnpm -F @monorepo-series/play-webpack-1 dev",
+    "play-webpack-2:dev": "pnpm -F @monorepo-series/play-webpack-2 dev",
+    "play-vue:dev": "pnpm -F @monorepo-series/play-vue dev",
+    "server:serve": "pnpm -F @monorepo-series/server serve",
+    "run-all:dev": "conc \"npm:play-vue:dev\"  \"npm:server:serve\""
   },
   "dependencies": {
     "html-webpack-plugin": "catalog:",
