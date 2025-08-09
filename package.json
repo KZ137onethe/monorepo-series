@@ -26,8 +26,8 @@
     "webpack-dev-server": "catalog:"
   },
   "devDependencies": {
+    "@changesets/changelog-git": "^0.2.1",
     "@changesets/cli": "catalog:",
-    "@changesets/git": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "concurrently": "catalog:",
     "vite": "catalog:"

@@ -309,3 +309,36 @@ conc 'command1 arg' 'command2 arg'
 
 当然`concurrently`还有很多api，可以在node.js中使用，但不属于本文章的范畴。
 
+#### 管理版本和变更日志
+
+为了方便管理版本（多包）和记录不同子包的变更日志，我们可以使用[changesets](https://github.com/changesets/changesets)
+
+* 安装：
+
+  ```shell
+  # 项目内安装 changesets
+  pnpm add -D -w @changesets/cli
+  # 或者全局安装 changesets
+  npm install -g @changesets/cli
+  
+  # 安装更改日志生成器包
+  pnpm add -D -w @changesets/changelog-git
+  ```
+
+* 初始化
+
+  ```shell
+  changeset init
+  ```
+
+  他会生成一个.changeset文件夹，会包含changeset的配置文件`config.json`和发布版本前存储日志的文件`README.md`
+
+  ```
+  .changeset
+  ├─ config.json # 配置文件
+  └─ README.md # 发布版本前存储日志的文件
+  ```
+
+  `config.json`的配置请参考：[配置信息](https://github.com/changesets/changesets/blob/main/docs/config-file-options.md#access-restricted--public)
+
+  
