@@ -16,7 +16,7 @@
     "play-webpack-2:dev": "pnpm -F @monorepo-series/play-webpack-2 dev",
     "play-vue:dev": "pnpm -F @monorepo-series/play-vue dev",
     "server:serve": "pnpm -F @monorepo-series/server serve",
-    "run-all:dev": "conc \"npm:play-vue:dev\"  \"npm:server:serve\""
+    "run-app": "conc \"npm:play-vue:dev\"  \"npm:server:serve\""
   },
   "dependencies": {
     "html-webpack-plugin": "catalog:",
@@ -26,6 +26,8 @@
     "webpack-dev-server": "catalog:"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "catalog:",
+    "@changesets/cli": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "concurrently": "catalog:",
     "vite": "catalog:"

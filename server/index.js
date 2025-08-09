@@ -14,6 +14,14 @@ app.get("/fruit", (req, res) => {
   })
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+import("chalk").then((chalkModule) => {
+  const chalk = chalkModule.default;
+  app.listen(PORT, () => {
+    console.log(
+      [
+        chalk.bold("  Express Server is start!"),
+        chalk.green(`  -> ${chalk.bold("Local")}:   ${chalk.blue("http://localhost:" + PORT + "/")}`)
+      ].join('\n'))
+  });
+})
+

@@ -7,6 +7,8 @@ packages:
   - server
 
 catalog:
+  "@changesets/cli": ^2.29.5
+  "@changesets/changelog-github": ^0.5.1
   # webpack相关
   webpack: ^5.100.2
   webpack-cli: ^6.0.1
@@ -18,7 +20,7 @@ catalog:
   gasp: ^3.13.0
   sass: ^1.86.1
   sass-loader: ^16.0.5
-  # 其他
+  # vite + vue相关
   vite: ^6.0.6
   vue: ^3.5.13
   "@vitejs/plugin-vue": ^5.2.1
@@ -26,6 +28,7 @@ catalog:
   express: ^5.1.0
   concurrently: ^9.2.0
   nodemon: ^3.1.10
+  chalk: ^5.5.0
 
 catalogs:
   webpack4:
