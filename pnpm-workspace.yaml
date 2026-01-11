@@ -1,37 +1,37 @@
 packages:
   - a
-  - "apps/*"
-  - "packages/*"
-  - "!**/test"
-  - "demo/**"
+  - apps/*
+  - packages/*
+  - '!**/test'
+  - demo/**
   - server
 
 catalog:
-  "@changesets/cli": ^2.29.5
-  "@changesets/git": ^3.0.4
-  # webpack相关
-  webpack: ^5.100.2
-  webpack-cli: ^6.0.1
-  html-webpack-plugin: ^5.6.3
-  webpack-dev-server: ^5.2.0
+  '@changesets/changelog-git': ^0.2.1
+  '@changesets/cli': ^2.29.8
+  '@changesets/git': ^3.0.4
+  '@vitejs/plugin-vue': ^5.2.4
+  chalk: ^5.5.0
+  concurrently: ^9.2.1
+  es-toolkit: ^1.43.0
+  express: ^5.1.0
+  gasp: ^3.13.0
+  html-webpack-plugin: ^5.6.5
+  nodemon: ^3.1.10
   postcss: ^8.5.6
   postcss-loader: ^8.1.1
   postcss-preset-env: ^10.1.5
-  gasp: ^3.13.0
   sass: ^1.86.1
   sass-loader: ^16.0.5
-  # vite + vue相关
-  vite: ^6.0.6
-  vue: ^3.5.13
-  "@vitejs/plugin-vue": ^5.2.1
-  # 服务端
-  express: ^5.1.0
-  concurrently: ^9.2.0
-  nodemon: ^3.1.10
-  chalk: ^5.5.0
+  vite: ^6.4.1
+  vue: ^3.5.26
+  webpack: ^5.104.1
+  webpack-cli: ^6.0.1
+  webpack-dev-server: ^5.2.2
+
+catalogMode: prefer
 
 catalogs:
   webpack4:
     webpack: 4.47.0
     webpack-cli: 4.10.0
-  

@@ -19,6 +19,7 @@
     "run-app": "conc \"npm:play-vue:dev\"  \"npm:server:serve\""
   },
   "dependencies": {
+    "es-toolkit": "catalog:",
     "html-webpack-plugin": "catalog:",
     "vue": "catalog:",
     "webpack": "catalog:",
@@ -26,7 +27,7 @@
     "webpack-dev-server": "catalog:"
   },
   "devDependencies": {
-    "@changesets/changelog-git": "^0.2.1",
+    "@changesets/changelog-git": "catalog:",
     "@changesets/cli": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "concurrently": "catalog:",
