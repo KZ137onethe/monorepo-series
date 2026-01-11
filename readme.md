@@ -12,9 +12,11 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
 
 1. [你一定能学会Monorepo - 小野的web世界](https://www.bilibili.com/video/BV1TZz7YvEWZ/?spm_id_from=333.999.0.0&vd_source=1c6268f99220acd2592c93a3a87cbe31)
 
-2. 和杜成讨论
+2. [pnpm - 工作空间](https://pnpm.io/zh/workspaces)
 
-3. 代码实践
+3. 和杜成讨论
+
+4. 代码实践
 
 ### 使用pnpm搭建
 
@@ -132,7 +134,21 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
        	gsap: ^3.14.2
      ```
 
-   * `catalogMode`（pnpm>=10.12.1）
+   * `catalogMode`（pnpm>=10.12.1）安装依赖包时，按照约定模式来安装依赖
+
+     三种模式：
+
+     strict: 仅允许来自catalog目录协议的依赖版本。
+
+     prefer: 优先使用pnpmcatalog目录协议的依赖版本，但如果未找到兼容版本，则会退回到package.json中的直接依赖项。
+
+     manual: 不会自动将依赖项添加到pnpm-lock.yaml的catalog目录协议中，这个是默认的。
+
+     一般来说使用 prefer 会更好管理：
+
+     <video controls width="auto" autoplay loop muted playsinline>
+       <source src="./.static/video/pnpm-catalogMode.mp4" type="video/mp4">
+     </video>
 
 3. 安装依赖
 
@@ -148,14 +164,17 @@ Monorepo是一种软件开发实践，其中所有的项目或库都托管在同
 
      安装工作区下的一个范围包依赖
 
-   * `pnpm update`
+   * `pnpm up`
 
-     默认更新依赖版本。
+     全称`pnpm update`默认更新依赖版本。
 
      当 package.json 使用 catalog 目录协议时，pnpm-workspace.yaml 相关的 catalog 选项（单数和复数）会自动更新依赖版本号
 
-     TODO: 添加一个操作过程的动图
-
+     <video controls width="auto" autoplay loop muted playsinline>
+       <source src="./.static/video/pnpm-update.mp4" type="video/mp4">
+     </video>
+     
+     
      
 
 4. 其他
