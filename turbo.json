@@ -1,0 +1,13 @@
+{
+	"$schema": "https://turborepo.dev/schema.json",
+	"concurrency": "4",
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**"]
+		},
+		"dev": {
+			"dependsOn": ["^dev"]
+		}
+	}
+}

@@ -1,16 +1,20 @@
 {
-  "name": "@monorepo-series/play-vue",
-  "version": "1.0.0",
+  "name": "@monorepo-series/web",
+  "version": "1.0.1",
   "description": "",
   "private": "true",
   "main": "index.js",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "dependencies": {
     "@monorepo-series/utils": "workspace:*"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "catalog:"
+  }
 }

@@ -1,11 +1,12 @@
 {
   "name": "@monorepo-series/server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": "true",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "node index.js"
   },
   "keywords": [],
   "dependencies": {

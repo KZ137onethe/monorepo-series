@@ -1,5 +1,11 @@
 # @monorepo-series/server
 
+## 1.0.2
+
+### Patch Changes
+
+- 修改 server 子包的位置
+
 ## 1.0.1
 
 ### Major Changes

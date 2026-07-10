@@ -9,14 +9,16 @@
     "concurrently": ">=9.0.0",
     "nodemon": ">=3.0.0"
   },
+	"packageManager": "pnpm@10.15.1",
   "scripts": {
     "clean": "rimraf **/node_modules --glob",
     "reinstall": "pnpm run clean && pnpm install",
     "play-webpack-1:dev": "pnpm -F @monorepo-series/play-webpack-1 dev",
     "play-webpack-2:dev": "pnpm -F @monorepo-series/play-webpack-2 dev",
-    "play-vue:dev": "pnpm -F @monorepo-series/play-vue dev",
-    "server:serve": "pnpm -F @monorepo-series/server serve",
-    "run-app": "conc \"npm:play-vue:dev\"  \"npm:server:serve\""
+    "web:dev": "pnpm -F @monorepo-series/web dev",
+		"server:dev": "pnpm -F @monorepo-series/server dev",
+		"dev": "turbo dev",
+		"build": "turbo build"
   },
   "dependencies": {
     "es-toolkit": "catalog:",
@@ -31,6 +33,7 @@
     "@changesets/cli": "catalog:",
     "@vitejs/plugin-vue": "catalog:",
     "concurrently": "catalog:",
+    "turbo": "catalog:",
     "vite": "catalog:"
   }
 }

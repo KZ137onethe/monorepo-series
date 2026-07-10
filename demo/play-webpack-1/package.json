@@ -1,11 +1,11 @@
 {
   "name": "play-webpack-1",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "private":"true",
+  "private": "true",
   "main": "index.js",
   "scripts": {
-    "dev": "npx webpack-dev-server"
+    "serve": "npx webpack-dev-server"
   },
   "dependencies": {
     "@monorepo-series/utils": "workspace:*"
