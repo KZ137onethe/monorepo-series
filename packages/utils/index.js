@@ -20,3 +20,5 @@ export const random = (min, max) => {
   const [val] = window.crypto.getRandomValues(arr);
   return val
 }
+
+export { UseDate } from "./date.js"
